@@ -4,16 +4,16 @@
 
 ## Why?
 
-In Ruby many APIs tend to accept symbols, but regularly convert them to string internally. The typical example is
+In Ruby many APIs tend to accept symbols, but they regularly convert them to strings internally. The typical example is
 `ActiveSupport::HashWithIndifferentAccess`, but there are plenty more.
 
 The problem with this is that `Symbol#to_s` creates a new string every time it is invoked, and since it often happens
-in hotspots, it causes a lot of work for the garbage collector, and cause many identical strings to be kept in memory.
+in hotspots, it causes a lot of work for the garbage collector, and causes many identical strings to be kept in memory.
 
-There was [an attempt to make `Symbol#to_s` return it's internal fstring for Ruby 2.7](https://bugs.ruby-lang.org/issues/16150),
-but unfortunately it got reverted, instead [Ruby 3.0 should have `Symbol#name`](https://github.com/ruby/ruby/commit/eb67c603ca7e435181684857e650b4633fda5bb6).
+There was [an attempt to make `Symbol#to_s` return its internal fstring for Ruby 2.7](https://bugs.ruby-lang.org/issues/16150),
+but unfortunately it got reverted. Instead, [Ruby 3.0 should have `Symbol#name`](https://github.com/ruby/ruby/commit/eb67c603ca7e435181684857e650b4633fda5bb6).
 
-This gem backports the `Symbol#name` method for older rubies, and optionally allow to replace `Symbol#to_s` by `Symbol#name`.
+This gem backports the `Symbol#name` method for older rubies, and optionally allows `Symbol#to_s` to be replaced with `Symbol#name`.
 
 ## Installation
 
@@ -37,7 +37,7 @@ Or install it yourself as:
 
 ### `Symbol.name`
 
-By default this gem backport the Ruby 3.0 `Symbol#name` method.
+By default this gem backports the Ruby 3.0 `Symbol#name` method.
 
 ### `FString.patch_symbol!`
 
